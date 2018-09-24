@@ -3,12 +3,17 @@ package sg.edu.nus.iss.phoenix.core.android.controller;
 import sg.edu.nus.iss.phoenix.authenticate.android.controller.LoginController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.controller.ProgramController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.controller.ReviewSelectProgramController;
+import sg.edu.nus.iss.phoenix.scheduleprogram.android.controller.MaintainScheduleController;
+import sg.edu.nus.iss.phoenix.scheduleprogram.android.controller.ReviewSelectScheduledProgramController;
 
 public class ControlFactory {
     private static MainController mainController = null;
     private static LoginController loginController = null;
     private static ProgramController programController = null;
     private static ReviewSelectProgramController reviewSelectProgramController = null;
+    private static MaintainScheduleController maintainScheduleController = null;
+    private static ReviewSelectScheduledProgramController reviewSelectScheduledProgramController = null;
+    //private static ReviewSelectPresenterProducerController  reviewSelectPresenterProducerProgramController =null;
 
     public static MainController getMainController() {
         if (mainController == null) mainController = new MainController();
@@ -29,4 +34,19 @@ public class ControlFactory {
         if (reviewSelectProgramController == null) reviewSelectProgramController = new ReviewSelectProgramController();
         return reviewSelectProgramController;
     }
+
+    public static MaintainScheduleController getMaintainScheduleController(){
+        if (maintainScheduleController == null) maintainScheduleController = new MaintainScheduleController();
+        return maintainScheduleController;
+    }
+
+    public static ReviewSelectScheduledProgramController getReviewSelectScheduledProgramController() {
+        if (reviewSelectScheduledProgramController == null) reviewSelectScheduledProgramController = new ReviewSelectScheduledProgramController();
+        return reviewSelectScheduledProgramController;
+    }
+
+    /*public static ReviewSelectPresenterProducerController getReviewSelectPresenterProducerProgramController() {
+        if (reviewSelectPresenterProducerProgramController == null) reviewSelectPresenterProducerProgramController = new ReviewSelectPresenterProducerController();
+        return reviewSelectPresenterProducerProgramController;
+    }*/
 }
