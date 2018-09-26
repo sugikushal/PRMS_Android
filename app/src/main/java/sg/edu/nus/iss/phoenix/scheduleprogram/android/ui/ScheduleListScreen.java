@@ -1,9 +1,11 @@
 package sg.edu.nus.iss.phoenix.scheduleprogram.android.ui;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -59,6 +61,23 @@ public class ScheduleListScreen extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        mListView.setSelection(0);
+
+        ControlFactory.getMaintainScheduleController().onDisplayProgramSlotList(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_editor.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+        return true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -72,7 +91,7 @@ public class ScheduleListScreen extends AppCompatActivity {
                     Log.v(TAG, "There is no selected program slot.");
                 }
                 else {
-                    Log.v(TAG, "Viewing program slot: " + selectedPS.getProgramSlotName() + "...");
+                    Log.v(TAG, "Viewing program slot: " + selectedPS.getName() + "...");
                     //ControlFactory.getProgramController().selectEditProgram(selectedPS);
                 }
         }

@@ -3,6 +3,7 @@ package sg.edu.nus.iss.phoenix.scheduleprogram.android.controller;
 import android.content.Intent;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
+import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.CreateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ScheduleListScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ScheduleScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
@@ -25,8 +26,23 @@ public class MaintainScheduleController {
         MainController.displayScreen(intent);
     }
 
-    /*public void onDisplayProgramSlotList(ScheduleListScreen scheduleListScreen) {
+    public void selectCreateScheduleProgram(ProgramSlot ps) {
+        new CreateScheduleDelegate(this).execute(ps);
+    }
+
+    public void scheduleCreated(boolean success) {
+        // Go back to ScheduleList screen with refreshed program Slots.
+        startUseCase();
+    }
+
+
+    public void onDisplayProgramSlotList(ScheduleListScreen scheduleListScreen) {
         this.scheduleListScreen = scheduleListScreen;
         new RetrieveScheduleDelegate(this).execute("all");
-    }*/
+    }
+
+    public void selectCancelCreateEditSchedule() {
+        // Go back to ScheduleList screen with refreshed schedules.
+        startUseCase();
+    }
 }
