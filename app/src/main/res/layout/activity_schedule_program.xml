@@ -9,16 +9,32 @@
     tools:context=".scheduleprogram.android.ui.ScheduleScreen">
 
 
-        <TextView
+        <EditText
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
-            tools:text="Name" />
-        <EditText
-        android:id="@+id/pgslot_name_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Radio Program Name" />
+            android:text="Radio Program"
+            tools:text="Radio Program" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_view1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SELECT"
+                    tools:text="SELECT" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +42,7 @@
             tools:text="Date Of Program" />
 
         <EditText
-            android:id="@+id/pgslot_date_text_view"
+            android:id="@+id/pgslot_desc_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="one" />
@@ -53,7 +69,68 @@
             android:id="@+id/pgslot_starttime_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="35"
+            android:maxLength="8"
             android:text="00:30:00"
             tools:text="00:30:00" />
-    </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Presenter Or Producer"
+            tools:text="Presenter Or Producer" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                    android:id="@+id/text_view2"
+                    android:layout_width="212dp"
+                    android:layout_height="wrap_content"
+                    android:text="Please Select Producer" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SELECT Pro"
+                    tools:text="SELECT Pro "
+                    android:background="@color/bg_main"
+                    />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                    android:id="@+id/text_view3"
+                    android:layout_width="212dp"
+                    android:layout_height="wrap_content"
+                    android:text="Please Select Presenter" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SELECT Pre"
+                    tools:text="SELECT Pre "
+                    android:background="@color/bg_main"/>
+
+                </LinearLayout>
+        </LinearLayout>
+
+</LinearLayout>

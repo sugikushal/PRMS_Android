@@ -19,15 +19,27 @@ import sg.edu.nus.iss.phoenix.scheduleprogram.android.controller.MaintainSchedul
 import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_BASE_URL_SCHEDULE_PROGRAM;
 
 public class CreateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean> {
-
+    // Tag for logging
     private static final String TAG = CreateScheduleDelegate.class.getName();
 
     private final MaintainScheduleController scheduleController;
 
+    /**
+     * Constructors.
+     * The first one takes no arguments and provides the most simple
+     * way to create object instance. The another one takes one
+     * argument, which is the primary key of the corresponding table.
+     * @param scheduleController
+     */
     public CreateScheduleDelegate(MaintainScheduleController scheduleController) {
         this.scheduleController = scheduleController;
     }
 
+    /**
+     *doInBackground-method. This method is to pass the parameters obtained from the front end to java end.
+     * @param params
+     * @return
+     */
     @Override
     protected Boolean doInBackground(ProgramSlot... params) {
         Uri builtUri = Uri.parse(PRMS_BASE_URL_SCHEDULE_PROGRAM).buildUpon().build();
@@ -84,6 +96,10 @@ public class CreateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean
         return new Boolean(success);
     }
 
+    /**
+     *onPostExecute-method.This method is to execute schedule controller.
+     * @param result ,result for whether schedule controller execute.
+     */
     @Override
     protected void onPostExecute(Boolean result) {
         scheduleController.scheduleCreated(result.booleanValue());

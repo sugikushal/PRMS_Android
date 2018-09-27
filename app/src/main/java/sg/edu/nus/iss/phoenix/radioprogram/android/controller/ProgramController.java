@@ -23,27 +23,45 @@ public class ProgramController {
     private MaintainProgramScreen maintainProgramScreen;
     private RadioProgram rp2edit = null;
 
+    /**
+     *
+     */
     public void startUseCase() {
         rp2edit = null;
         Intent intent = new Intent(MainController.getApp(), ProgramListScreen.class);
         MainController.displayScreen(intent);
     }
 
+    /**
+     *
+     * @param programListScreen
+     */
     public void onDisplayProgramList(ProgramListScreen programListScreen) {
         this.programListScreen = programListScreen;
         new RetrieveProgramsDelegate(this).execute("all");
     }
 
+    /**
+     *
+     * @param radioPrograms
+     */
     public void programsRetrieved(List<RadioProgram> radioPrograms) {
         programListScreen.showPrograms(radioPrograms);
     }
 
+    /**
+     *
+     */
     public void selectCreateProgram() {
         rp2edit = null;
         Intent intent = new Intent(MainController.getApp(), MaintainProgramScreen.class);
         MainController.displayScreen(intent);
     }
 
+    /**
+     *
+     * @param radioProgram
+     */
     public void selectEditProgram(RadioProgram radioProgram) {
         rp2edit = radioProgram;
         Log.v(TAG, "Editing radio program: " + radioProgram.getRadioProgramName() + "...");
@@ -58,6 +76,10 @@ public class ProgramController {
         MainController.displayScreen(intent);
     }
 
+    /**
+     *
+     * @param maintainProgramScreen
+     */
     public void onDisplayProgram(MaintainProgramScreen maintainProgramScreen) {
         this.maintainProgramScreen = maintainProgramScreen;
         if (rp2edit == null)
@@ -66,33 +88,60 @@ public class ProgramController {
             maintainProgramScreen.editProgram(rp2edit);
     }
 
+    /**
+     *
+     * @param rp
+     */
     public void selectUpdateProgram(RadioProgram rp) {
         new UpdateProgramDelegate(this).execute(rp);
     }
 
+    /**
+     *
+     * @param rp
+     */
     public void selectDeleteProgram(RadioProgram rp) {
         new DeleteProgramDelegate(this).execute(rp.getRadioProgramName());
     }
 
+    /**
+     *
+     * @param success
+     */
     public void programDeleted(boolean success) {
         // Go back to ProgramList screen with refreshed programs.
         startUseCase();
     }
 
+    /**
+     *
+     * @param success
+     */
     public void programUpdated(boolean success) {
         // Go back to ProgramList screen with refreshed programs.
         startUseCase();
     }
 
+    /**
+     *
+     * @param rp
+     */
     public void selectCreateProgram(RadioProgram rp) {
         new CreateProgramDelegate(this).execute(rp);
     }
 
+    /**
+     *
+     * @param success
+     */
     public void programCreated(boolean success) {
         // Go back to ProgramList screen with refreshed programs.
         startUseCase();
     }
 
+    /**
+     *
+     */
     public void selectCancelCreateEditProgram() {
         // Go back to ProgramList screen with refreshed programs.
         startUseCase();

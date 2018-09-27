@@ -39,7 +39,7 @@
         <activity android:name=".radioprogram.android.ui.MaintainProgramScreen" />
         <activity android:name=".radioprogram.android.ui.ReviewSelectProgramScreen"/>
         <activity android:name=".scheduleprogram.android.ui.ReviewSelectScheduleProgramScreen"/>
-        <activity android:name=".scheduleprogram.android.ui.ReviewSelectScheduleProducerPresenterScreen"/>
+        <activity android:name=".scheduleprogram.android.ui.ReviewSelectScheduleProducerScreen"/>
         <activity android:name=".scheduleprogram.android.ui.ScheduleListScreen"/>
         <activity android:name=".scheduleprogram.android.ui.ScheduleScreen"/>
     </application>
