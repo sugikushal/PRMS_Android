@@ -89,6 +89,7 @@ public class ReviewSelectProgramScreen extends AppCompatActivity {
                 else {
                     Log.v(TAG, "Selected radio program: " + selectedRP.getRadioProgramName() + "...");
                     ControlFactory.getReviewSelectProgramController().selectProgram(selectedRP);
+                    super.onBackPressed();
                 }
         }
 
@@ -97,7 +98,7 @@ public class ReviewSelectProgramScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        ControlFactory.getReviewSelectProgramController().selectCancel();
+        super.onBackPressed();
     }
 
     public void showPrograms(List<RadioProgram> radioPrograms) {

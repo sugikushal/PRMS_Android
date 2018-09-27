@@ -7,6 +7,8 @@ import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import java.text.ParseException;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
+import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 
 public class ScheduleScreen extends AppCompatActivity {
@@ -26,7 +29,8 @@ public class ScheduleScreen extends AppCompatActivity {
     private EditText mPSDurationEditText;
     private EditText mPSStartTime;
     KeyListener mPSDateEditTextKeyListener = null;
-    KeyListener mPSStartKeyListener = null;
+    KeyListener mPSStartTimeKeyListener = null;
+    KeyListener mRPNameEditTextKeyListener = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,16 @@ public class ScheduleScreen extends AppCompatActivity {
         mPSStartTime = (EditText) findViewById(R.id.pgslot_starttime_text_view);
 
         mPSDateEditTextKeyListener = mPSDateEditText.getKeyListener();
-        mPSStartKeyListener = mPSStartTime.getKeyListener();
+        mPSStartTimeKeyListener = mPSStartTime.getKeyListener();
+        mRPNameEditTextKeyListener = mRPNameEditText.getKeyListener();
+
+        Button selectRadioProgramButton = (Button) findViewById(R.id.select_pg_button);
+        selectRadioProgramButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getReviewSelectProgramController().startUseCase();
+            }
+        });
     }
 
     @Override
@@ -121,25 +134,32 @@ public class ScheduleScreen extends AppCompatActivity {
 
     public void createScheduleProgram() {
         this.psedit = null;
-        mRPNameEditText.setText("", TextView.BufferType.EDITABLE);
+        mRPNameEditText.setText("", TextView.BufferType.NORMAL);
         mPSDurationEditText.setText("", TextView.BufferType.EDITABLE);
         mPSDateEditText.setText("", TextView.BufferType.EDITABLE);
         mPSStartTime.setText("",TextView.BufferType.EDITABLE);
         //todo presenter producer
         mPSDateEditText.setKeyListener(mPSDateEditTextKeyListener);
-        mPSStartTime.setKeyListener(mPSStartKeyListener);
+        mPSStartTime.setKeyListener(mPSStartTimeKeyListener);
+        mRPNameEditText.setKeyListener(mRPNameEditTextKeyListener);
     }
 
     public void editScheduleProgram(ProgramSlot psedit) {
         this.psedit = psedit;
         if (psedit != null) {
-            mRPNameEditText.setText(psedit.getName(), TextView.BufferType.EDITABLE);
+            mRPNameEditText.setText(psedit.getName(), TextView.BufferType.NORMAL);
             mPSDurationEditText.setText(psedit.getDuration(), TextView.BufferType.EDITABLE);
             mPSDateEditText.setText(psedit.getDate(), TextView.BufferType.NORMAL);
             mPSStartTime.setText(psedit.getStartTime(), TextView.BufferType.NORMAL);
             //todo presenter producer
             mPSDateEditText.setKeyListener(null);
             mPSStartTime.setKeyListener(null);
+            mRPNameEditText.setKeyListener(null);
         }
+    }
+
+    public void setRadioProgram(RadioProgram rp){
+        mRPNameEditText.setText(rp.getRadioProgramName(),TextView.BufferType.NORMAL);
+        mRPNameEditText.setKeyListener(null);
     }
 }

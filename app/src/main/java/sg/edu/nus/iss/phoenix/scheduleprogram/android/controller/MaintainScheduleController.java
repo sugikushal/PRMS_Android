@@ -20,6 +20,7 @@ public class MaintainScheduleController {
     private ProgramSlot psedit = null;
     private ScheduleListScreen scheduleListScreen;
     private ScheduleScreen scheduleScreen;
+    private RadioProgram rpSelected = null;
 
     /**
      * startUseCase-method.This method is starting the use case and display information on screen.
@@ -115,5 +116,10 @@ public class MaintainScheduleController {
             scheduleScreen.createScheduleProgram();
         else
             scheduleScreen.editScheduleProgram(psedit);
+    }
+
+    public void selectedProgram(RadioProgram rpSelected) {
+        this.rpSelected = rpSelected;
+        scheduleScreen.setRadioProgram(rpSelected);
     }
 }
