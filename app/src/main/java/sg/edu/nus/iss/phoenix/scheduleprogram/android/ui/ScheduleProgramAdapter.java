@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,6 +48,15 @@ public class ScheduleProgramAdapter extends ArrayAdapter<ProgramSlot> {
         EditText schedulePMStartTime = (EditText)listItemView.findViewById(R.id.pgslot_starttime_text_view);
         schedulePMStartTime.setText(currentPS.getStartTime(), TextView.BufferType.NORMAL);
         schedulePMStartTime.setKeyListener(null);
+
+        Button selectRPButton = (Button) listItemView.findViewById(R.id.select_pg_button);
+        selectRPButton.setVisibility(View.INVISIBLE);
+
+        LinearLayout presenterProducerLayout = (LinearLayout) listItemView.findViewById(R.id.presenter_producer_layout);
+        presenterProducerLayout.setVisibility(LinearLayout.GONE);
+
+        TextView presenProdTextView = (TextView) listItemView.findViewById(R.id.presenter_producer_textView);
+        presenProdTextView.setVisibility(View.INVISIBLE);
 
         return listItemView;
     }

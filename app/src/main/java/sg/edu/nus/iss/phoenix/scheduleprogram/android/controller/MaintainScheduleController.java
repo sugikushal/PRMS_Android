@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.phoenix.scheduleprogram.android.controller;
 
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class MaintainScheduleController {
     private static final String TAG = MaintainScheduleController.class.getName();
     private ProgramSlot psedit = null;
     private ScheduleListScreen scheduleListScreen;
+    private ScheduleScreen scheduleScreen;
 
     /**
      * startUseCase-method.This method is starting the use case and display information on screen.
@@ -97,5 +99,21 @@ public class MaintainScheduleController {
      */
     public void scheduleRetrieved(List<ProgramSlot> programSlots) {
         scheduleListScreen.showSchedulePrograms(programSlots);
+    }
+
+    public void selectEditScheduleProgram(ProgramSlot programSlot) {
+        psedit = programSlot;
+        Log.v(TAG, "Editing Program Slot " + programSlot.getName() + "...");
+
+        Intent intent = new Intent(MainController.getApp(), ScheduleScreen.class);
+        MainController.displayScreen(intent);
+    }
+
+    public void onDisplayScheduleProgram(ScheduleScreen scheduleScreen) {
+        this.scheduleScreen = scheduleScreen;
+        if(psedit == null)
+            scheduleScreen.createScheduleProgram();
+        else
+            scheduleScreen.editScheduleProgram(psedit);
     }
 }

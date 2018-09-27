@@ -94,7 +94,7 @@ public class ScheduleListScreen extends AppCompatActivity {
                 }
                 else {
                     Log.v(TAG, "Viewing program slot: " + selectedPS.getName() + "...");
-                    //ControlFactory.getProgramController().selectEditProgram(selectedPS);
+                    ControlFactory.getMaintainScheduleController().selectEditScheduleProgram(selectedPS);
                 }
         }
 
