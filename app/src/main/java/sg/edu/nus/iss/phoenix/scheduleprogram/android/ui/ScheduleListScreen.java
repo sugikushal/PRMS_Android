@@ -13,9 +13,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
+import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 
 public class ScheduleListScreen extends AppCompatActivity {
@@ -102,5 +104,12 @@ public class ScheduleListScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         ControlFactory.getProgramController().maintainedProgram();
+    }
+
+    public void showSchedulePrograms(List<ProgramSlot> programSlots) {
+        mSPAdapter.clear();
+        for (int i = 0; i < programSlots.size(); i++) {
+            mSPAdapter.add(programSlots.get(i));
+        }
     }
 }

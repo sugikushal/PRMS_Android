@@ -69,22 +69,25 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
         return jsonResp;
     }
 
-   /* @Override
+   @Override
     protected void onPostExecute(String result) {
         List<ProgramSlot> programSlots = new ArrayList<>();
 
         if (result != null && !result.equals("")) {
             try {
                 JSONObject reader = new JSONObject(result);
-                JSONArray rpArray = reader.getJSONArray("rpList");
+                JSONArray psArray = reader.getJSONArray("pgSlots");
 
-                for (int i = 0; i < rpArray.length(); i++) {
-                    JSONObject rpJson = rpArray.getJSONObject(i);
-                    String description = rpJson.getString("description");
-                    String name = rpJson.getString("name");
-                    String typicalDuration = rpJson.getString("typicalDuration");
+                for (int i = 0; i < psArray.length(); i++) {
+                    JSONObject psJson = psArray.getJSONObject(i);
+                    String name = psJson.getString("name");
+                    String duration  = psJson.getString("duration");
+                    String date = psJson.getString("date");
+                    String startTime = psJson.getString("startTime");
+                    String presenter = psJson.getString("presenter");
+                    String producer = psJson.getString("producer");
 
-                    programSlots.add(new ProgramSlot());
+                    programSlots.add(new ProgramSlot(name,duration,date,startTime,presenter,producer));
                 }
             } catch (JSONException e) {
                 Log.v(TAG, e.getMessage());
@@ -94,8 +97,8 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
         }
 
         if (maintainScheduleController != null)
-            maintainScheduleController.programsRetrieved(radioPrograms);
-        else if (reviewSelectScheduledProgramController != null)
-            reviewSelectScheduledProgramController.programsRetrieved(radioPrograms);
-    }*/
+            maintainScheduleController.scheduleRetrieved(programSlots);
+        /*else if (reviewSelectScheduledProgramController != null)
+            reviewSelectScheduledProgramController.scheduleRetrieved(programSlots);*/
+    }
 }

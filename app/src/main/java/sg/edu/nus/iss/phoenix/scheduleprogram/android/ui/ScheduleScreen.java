@@ -64,7 +64,7 @@ public class ScheduleScreen extends AppCompatActivity {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Save radio program.
-               if (psedit == null) { // Newly created.
+                if (psedit == null) { // Newly created.
                     Log.v(TAG, "Saving program slot " + mRPNameEditText.getText().toString() + "...");
                     Date date = formatDate(mPSDurationEditText.getText().toString());
 
@@ -72,12 +72,11 @@ public class ScheduleScreen extends AppCompatActivity {
                             mPSDurationEditText.getText().toString(),mPSDateEditText.getText().toString() ,mPSStartTime.getText().toString(),"presenter","producer");
                     ControlFactory.getMaintainScheduleController().selectCreateScheduleProgram(ps);
                 }
-                /*else { // Edited.
-                    Log.v(TAG, "Saving radio program " + psedit.getName() + "...");
-                    psedit.;
-                    psedit.setRadioProgramDuration(mDurationEditText.getText().toString());
-                    ControlFactory.getProgramController().selectUpdateProgram(rp2edit);
-                }*/
+                else { // Edited.
+                    Log.v(TAG, "Saving program slot update " + psedit.getName() + "...");
+
+                    ControlFactory.getMaintainScheduleController().selectUpdateScheduleProgram(psedit);
+                }
                 return true;
             // Respond to a click on the "Delete" menu option
            /* case R.id.action_delete:
