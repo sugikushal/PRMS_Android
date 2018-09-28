@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Presenter;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 
 public class MainController {
@@ -69,6 +70,11 @@ public class MainController {
 
     // This is a dummy operation to test the invocation of Review Select Radio Program use case.
     public void selectedSchedule(ProgramSlot psSelected) {
+        startUseCase(username);
+    }
+
+
+    public void selectedPresenter(Presenter prSelected) {
         startUseCase(username);
     }
 }

@@ -12,6 +12,7 @@ import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.CreateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ScheduleListScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ScheduleScreen;
+import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Presenter;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.RetrieveScheduleDelegate;
 
@@ -22,7 +23,7 @@ public class MaintainScheduleController {
     private ScheduleListScreen scheduleListScreen;
     private ScheduleScreen scheduleScreen;
     private RadioProgram rpSelected = null;
-
+    private Presenter prSelected = null;
     /**
      * startUseCase-method.This method is starting the use case and display information on screen.
      */
@@ -122,6 +123,11 @@ public class MaintainScheduleController {
     public void selectedProgram(RadioProgram rpSelected) {
         this.rpSelected = rpSelected;
         scheduleScreen.setRadioProgram(rpSelected);
+    }
+
+    public void selectedPresenter(Presenter prSelected) {
+        this.prSelected = prSelected;
+        scheduleScreen.setPresenter(prSelected);
     }
 
     public void scheduleDeleted(boolean success) {

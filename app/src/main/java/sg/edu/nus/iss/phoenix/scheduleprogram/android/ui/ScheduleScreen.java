@@ -19,6 +19,7 @@ import java.text.ParseException;
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Presenter;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 
 public class ScheduleScreen extends AppCompatActivity {
@@ -28,9 +29,11 @@ public class ScheduleScreen extends AppCompatActivity {
     private EditText mPSDateEditText;
     private EditText mPSDurationEditText;
     private EditText mPSStartTime;
+    private EditText mPresenterNameEditText;
     KeyListener mPSDateEditTextKeyListener = null;
     KeyListener mPSStartTimeKeyListener = null;
     KeyListener mRPNameEditTextKeyListener = null;
+    KeyListener mPresenterNameEditTextKeyListener=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +44,26 @@ public class ScheduleScreen extends AppCompatActivity {
         mPSDateEditText = (EditText) findViewById(R.id.pgslot_date_text_view);
         mPSDurationEditText = (EditText) findViewById(R.id.pgslot_duration_text_view);
         mPSStartTime = (EditText) findViewById(R.id.pgslot_starttime_text_view);
+        mPresenterNameEditText =(EditText) findViewById(R.id.presenter_text_view);
 
         mPSDateEditTextKeyListener = mPSDateEditText.getKeyListener();
         mPSStartTimeKeyListener = mPSStartTime.getKeyListener();
         mRPNameEditTextKeyListener = mRPNameEditText.getKeyListener();
+        mPresenterNameEditTextKeyListener=mPresenterNameEditText.getKeyListener();
 
         Button selectRadioProgramButton = (Button) findViewById(R.id.select_pg_button);
         selectRadioProgramButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ControlFactory.getReviewSelectProgramController().startUseCase();
+            }
+        });
+
+        Button selectPresenterButton = (Button) findViewById(R.id.select_presenter_button);
+        selectPresenterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getReviewSelectPresenterController().startUseCase();
             }
         });
     }
@@ -94,7 +107,7 @@ public class ScheduleScreen extends AppCompatActivity {
                 if (psedit == null) { // Newly created.
                     Log.v(TAG, "Saving program slot " + mRPNameEditText.getText().toString() + "...");
                     ProgramSlot ps = new ProgramSlot(mRPNameEditText.getText().toString(),
-                            mPSDurationEditText.getText().toString(),mPSDateEditText.getText().toString() ,mPSStartTime.getText().toString(),"presenter","producer");
+                            mPSDurationEditText.getText().toString(),mPSDateEditText.getText().toString() ,mPSStartTime.getText().toString(),mPresenterNameEditText.getText().toString(),"producer");
                     ControlFactory.getMaintainScheduleController().selectCreateScheduleProgram(ps);
                 }
                 else { // Edited.
@@ -103,8 +116,8 @@ public class ScheduleScreen extends AppCompatActivity {
                     psedit.setDuration(mPSDurationEditText.getText().toString());
                     psedit.setDate(mPSDateEditText.getText().toString());
                     psedit.setStartTime(mPSStartTime.getText().toString());
-                    psedit.setProducer("producer");
-                    psedit.setPresenter("presenter");
+                    psedit.setProducer(mPresenterNameEditText.getText().toString());
+                    psedit.setPresenter(mPresenterNameEditText.getText().toString());
                     //todo presenter producer
                     /*psedit.setPresenter();
                     psedit.setProducer();*/
@@ -138,10 +151,12 @@ public class ScheduleScreen extends AppCompatActivity {
         mPSDurationEditText.setText("", TextView.BufferType.EDITABLE);
         mPSDateEditText.setText("", TextView.BufferType.EDITABLE);
         mPSStartTime.setText("",TextView.BufferType.EDITABLE);
+        mPresenterNameEditText.setText("", TextView.BufferType.NORMAL);
         //todo presenter producer
         mPSDateEditText.setKeyListener(mPSDateEditTextKeyListener);
         mPSStartTime.setKeyListener(mPSStartTimeKeyListener);
         mRPNameEditText.setKeyListener(mRPNameEditTextKeyListener);
+        mPresenterNameEditText.setKeyListener( mPresenterNameEditTextKeyListener);
     }
 
     public void editScheduleProgram(ProgramSlot psedit) {
@@ -151,10 +166,12 @@ public class ScheduleScreen extends AppCompatActivity {
             mPSDurationEditText.setText(psedit.getDuration(), TextView.BufferType.EDITABLE);
             mPSDateEditText.setText(psedit.getDate(), TextView.BufferType.NORMAL);
             mPSStartTime.setText(psedit.getStartTime(), TextView.BufferType.NORMAL);
+            mPresenterNameEditText.setText(psedit.getPresenter(), TextView.BufferType.NORMAL);
             //todo presenter producer
             mPSDateEditText.setKeyListener(null);
             mPSStartTime.setKeyListener(null);
             mRPNameEditText.setKeyListener(null);
+            mPresenterNameEditText.setKeyListener(null);
         }
     }
 
@@ -162,4 +179,11 @@ public class ScheduleScreen extends AppCompatActivity {
         mRPNameEditText.setText(rp.getRadioProgramName(),TextView.BufferType.NORMAL);
         mRPNameEditText.setKeyListener(null);
     }
+
+    public void setPresenter(Presenter pr){
+        mPresenterNameEditText.setText(pr.getPresenterId(),TextView.BufferType.NORMAL);
+        mPresenterNameEditText.setKeyListener(null);
+    }
+
+
 }

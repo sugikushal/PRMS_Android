@@ -3,27 +3,25 @@ package sg.edu.nus.iss.phoenix.scheduleprogram.android.controller;
 import android.content.Intent;
 import android.util.Log;
 
-import java.util.List;
-
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
-import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ReviewSelectScheduleProgramScreen;
+import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ReviewSelectProgramScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.RetrieveScheduleDelegate;
 
 public class ReviewSelectScheduledProgramController {
     // Tag for logging.
     private static final String TAG = ReviewSelectScheduledProgramController.class.getName();
-    private ReviewSelectScheduleProgramScreen reviewSelectScheduleProgramScreen;
+    private ReviewSelectProgramScreen reviewSelectScheduleProgramScreen;
     private ProgramSlot psSelected = null;
 
     public void startUseCase() {
         psSelected = null;
-        Intent intent = new Intent(MainController.getApp(), ReviewSelectScheduleProgramScreen.class);
+        Intent intent = new Intent(MainController.getApp(), ReviewSelectProgramScreen.class);
         MainController.displayScreen(intent);
     }
 
-    public void onDisplay(ReviewSelectScheduleProgramScreen reviewSelectScheduleProgramScreen) {
+    public void onDisplay(ReviewSelectProgramScreen reviewSelectScheduleProgramScreen) {
         this.reviewSelectScheduleProgramScreen = reviewSelectScheduleProgramScreen;
         new RetrieveScheduleDelegate(this).execute("all");
     }
