@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
+import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.DeleteScheduleDelegate;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.UpdateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.CreateScheduleDelegate;
@@ -121,5 +122,14 @@ public class MaintainScheduleController {
     public void selectedProgram(RadioProgram rpSelected) {
         this.rpSelected = rpSelected;
         scheduleScreen.setRadioProgram(rpSelected);
+    }
+
+    public void scheduleDeleted(boolean success) {
+        // Go back to ScheduleList screen with refreshed program Slots.
+        startUseCase();
+    }
+
+    public void selectDeleteProgram(ProgramSlot ps) {
+        new DeleteScheduleDelegate(this).execute(ps);
     }
 }

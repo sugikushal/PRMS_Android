@@ -112,10 +112,10 @@ public class ScheduleScreen extends AppCompatActivity {
                 }
                 return true;
             // Respond to a click on the "Delete" menu option
-           /* case R.id.action_delete:
-                Log.v(TAG, "Deleting program slot " + psedit.getProgramName() + "...");
+             case R.id.action_delete:
+                Log.v(TAG, "Deleting program slot " + psedit.getName() + "...");
                 ControlFactory.getMaintainScheduleController().selectDeleteProgram(psedit);
-                return true;*/
+                return true;
             // Respond to a click on the "Cancel" menu option
             case R.id.action_cancel:
                 Log.v(TAG, "Canceling creating/editing program slot...");
