@@ -50,7 +50,7 @@ public class ReviewSelectPresenterController {
 
     public void selectCancel() {
         prSelected = null;
-        Log.v(TAG, "Cancelled the seleciton of radio program.");
+        Log.v(TAG, "Cancelled the seleciton of presenter.");
         // To call the base use case controller without selection;
         // At present, call the MainController instead.
         ControlFactory.getMainController().selectedPresenter(prSelected);

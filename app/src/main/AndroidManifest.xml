@@ -43,6 +43,7 @@
         <activity android:name=".scheduleprogram.android.ui.ScheduleListScreen"/>
         <activity android:name=".scheduleprogram.android.ui.ScheduleScreen"/>
         <activity android:name=".scheduleprogram.android.ui.ReviewSelectPresenterScreen"/>
+        <activity android:name=".scheduleprogram.android.ui.ReviewSelectProducerScreen"/>
     </application>
 
 </manifest>

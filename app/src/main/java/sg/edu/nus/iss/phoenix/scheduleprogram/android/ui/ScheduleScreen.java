@@ -20,6 +20,7 @@ import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Presenter;
+import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Producer;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 
 public class ScheduleScreen extends AppCompatActivity {
@@ -30,10 +31,12 @@ public class ScheduleScreen extends AppCompatActivity {
     private EditText mPSDurationEditText;
     private EditText mPSStartTime;
     private EditText mPresenterNameEditText;
+    private EditText mProducerNameEditText;
     KeyListener mPSDateEditTextKeyListener = null;
     KeyListener mPSStartTimeKeyListener = null;
     KeyListener mRPNameEditTextKeyListener = null;
     KeyListener mPresenterNameEditTextKeyListener=null;
+    KeyListener mProducerNameEditTextKeyListener=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +48,13 @@ public class ScheduleScreen extends AppCompatActivity {
         mPSDurationEditText = (EditText) findViewById(R.id.pgslot_duration_text_view);
         mPSStartTime = (EditText) findViewById(R.id.pgslot_starttime_text_view);
         mPresenterNameEditText =(EditText) findViewById(R.id.presenter_text_view);
+        mProducerNameEditText =(EditText) findViewById(R.id.producer_text_view);
 
         mPSDateEditTextKeyListener = mPSDateEditText.getKeyListener();
         mPSStartTimeKeyListener = mPSStartTime.getKeyListener();
         mRPNameEditTextKeyListener = mRPNameEditText.getKeyListener();
         mPresenterNameEditTextKeyListener=mPresenterNameEditText.getKeyListener();
+        mProducerNameEditTextKeyListener=mProducerNameEditText.getKeyListener();
 
         Button selectRadioProgramButton = (Button) findViewById(R.id.select_pg_button);
         selectRadioProgramButton.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +69,14 @@ public class ScheduleScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ControlFactory.getReviewSelectPresenterController().startUseCase();
+            }
+        });
+
+        Button selectProducerButton = (Button) findViewById(R.id.select_producer_button);
+        selectProducerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getReviewSelectProducerController().startUseCase();
             }
         });
     }
@@ -184,6 +197,9 @@ public class ScheduleScreen extends AppCompatActivity {
         mPresenterNameEditText.setText(pr.getPresenterId(),TextView.BufferType.NORMAL);
         mPresenterNameEditText.setKeyListener(null);
     }
-
+    public void setProducer(Producer pro){
+        mProducerNameEditText.setText(pro.getProducerId(),TextView.BufferType.NORMAL);
+        mProducerNameEditText.setKeyListener(null);
+    }
 
 }

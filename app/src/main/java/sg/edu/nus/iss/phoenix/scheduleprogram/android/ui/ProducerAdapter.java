@@ -13,17 +13,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import sg.edu.nus.iss.phoenix.R;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Presenter;
+import sg.edu.nus.iss.phoenix.scheduleprogram.entity.Producer;
 
 /**
  * Created by Administrator on 2018/9/27.
  */
 
-public class PresenterAdapter  extends ArrayAdapter<Presenter> {
+public class ProducerAdapter extends ArrayAdapter<Producer> {
 
-    public PresenterAdapter(@NonNull Context context, ArrayList<Presenter> presenters) {
-        super(context, 0,presenters);
+    public ProducerAdapter(@NonNull Context context, ArrayList<Producer> producers) {
+        super(context, 0,producers);
     }
 
 
@@ -34,14 +34,14 @@ public class PresenterAdapter  extends ArrayAdapter<Presenter> {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.activity_presenter, parent, false);
+                    R.layout.activity_producer, parent, false);
         }
         //    Word currentWord = getItem(position);
-        Presenter currentPr = getItem(position);
+        Producer currentPro = getItem(position);
 
-        EditText PresenterName = (EditText)listItemView.findViewById(R.id.pre_name);
-        PresenterName.setText(currentPr.getPresenterId(), TextView.BufferType.NORMAL);
-        PresenterName.setKeyListener(null); // This disables editing.
+        EditText ProducerName = (EditText)listItemView.findViewById(R.id.pro_name);
+        ProducerName.setText(currentPro.getProducerId(), TextView.BufferType.NORMAL);
+        ProducerName.setKeyListener(null); // This disables editing.
 
 
 
