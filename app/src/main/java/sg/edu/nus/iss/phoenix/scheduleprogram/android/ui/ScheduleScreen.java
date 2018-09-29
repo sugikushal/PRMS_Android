@@ -120,7 +120,7 @@ public class ScheduleScreen extends AppCompatActivity {
                 if (psedit == null) { // Newly created.
                     Log.v(TAG, "Saving program slot " + mRPNameEditText.getText().toString() + "...");
                     ProgramSlot ps = new ProgramSlot(mRPNameEditText.getText().toString(),
-                            mPSDurationEditText.getText().toString(),mPSDateEditText.getText().toString() ,mPSStartTime.getText().toString(),mPresenterNameEditText.getText().toString(),"producer");
+                            mPSDurationEditText.getText().toString(),mPSDateEditText.getText().toString() ,mPSStartTime.getText().toString(),mPresenterNameEditText.getText().toString(),mProducerNameEditText.getText().toString());
                     ControlFactory.getMaintainScheduleController().selectCreateScheduleProgram(ps);
                 }
                 else { // Edited.
@@ -129,7 +129,7 @@ public class ScheduleScreen extends AppCompatActivity {
                     psedit.setDuration(mPSDurationEditText.getText().toString());
                     psedit.setDate(mPSDateEditText.getText().toString());
                     psedit.setStartTime(mPSStartTime.getText().toString());
-                    psedit.setProducer(mPresenterNameEditText.getText().toString());
+                    psedit.setProducer(mProducerNameEditText.getText().toString());
                     psedit.setPresenter(mPresenterNameEditText.getText().toString());
                     //todo presenter producer
                     /*psedit.setPresenter();
@@ -165,11 +165,14 @@ public class ScheduleScreen extends AppCompatActivity {
         mPSDateEditText.setText("", TextView.BufferType.EDITABLE);
         mPSStartTime.setText("",TextView.BufferType.EDITABLE);
         mPresenterNameEditText.setText("", TextView.BufferType.NORMAL);
+        mProducerNameEditText.setText("", TextView.BufferType.NORMAL);
+
         //todo presenter producer
         mPSDateEditText.setKeyListener(mPSDateEditTextKeyListener);
         mPSStartTime.setKeyListener(mPSStartTimeKeyListener);
         mRPNameEditText.setKeyListener(mRPNameEditTextKeyListener);
         mPresenterNameEditText.setKeyListener( mPresenterNameEditTextKeyListener);
+        mProducerNameEditText.setKeyListener( mProducerNameEditTextKeyListener);
     }
 
     public void editScheduleProgram(ProgramSlot psedit) {
@@ -180,6 +183,7 @@ public class ScheduleScreen extends AppCompatActivity {
             mPSDateEditText.setText(psedit.getDate(), TextView.BufferType.NORMAL);
             mPSStartTime.setText(psedit.getStartTime(), TextView.BufferType.NORMAL);
             mPresenterNameEditText.setText(psedit.getPresenter(), TextView.BufferType.NORMAL);
+            mProducerNameEditText.setText(psedit.getProducer(),TextView.BufferType.NORMAL);
             //todo presenter producer
             mPSDateEditText.setKeyListener(null);
             mPSStartTime.setKeyListener(null);

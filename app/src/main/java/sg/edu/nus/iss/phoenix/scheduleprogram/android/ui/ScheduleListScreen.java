@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,24 +27,44 @@ public class ScheduleListScreen extends AppCompatActivity {
     private ListView mListView;
     private ScheduleProgramAdapter mSPAdapter;
     private ProgramSlot selectedPS = null;
+    private Button CreateBtn=null;
+    private Button CopyBtn=null;
+    private Button DeleteBtn=null;
+    private Button BrowseBtn=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_program_list);
 
-        ArrayList<ProgramSlot> programSlots = new ArrayList<ProgramSlot>();
-        mSPAdapter = new ScheduleProgramAdapter(this, programSlots);
+
 
         // Setup FAB to open EditorActivity
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ControlFactory.getMaintainScheduleController().selectCreateScheduleProgram();
             }
+        });*/
+
+        CreateBtn =(Button) findViewById(R.id.CreateProgramSlotButton);
+        BrowseBtn =(Button) findViewById(R.id.BrowsePSbutton);
+
+        CreateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getMaintainScheduleController().selectCreateScheduleProgram();
+            }
+        });
+        BrowseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getReviewSelectScheduledProgramController().startUseCase();
+            }
         });
 
+/*
         mListView = (ListView) findViewById(R.id.schedule_pm_list);
         mListView.setAdapter(mSPAdapter);
 
@@ -60,17 +81,17 @@ public class ScheduleListScreen extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // your stuff
             }
-        });
+        });*/
     }
 
-    @Override
+  /*  @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mListView.setSelection(0);
 
         ControlFactory.getMaintainScheduleController().onDisplayProgramSlotList(this);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,13 +124,8 @@ public class ScheduleListScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        ControlFactory.getProgramController().maintainedProgram();
+        ControlFactory.getMaintainScheduleController().maintainedSchedule();
     }
 
-    public void showSchedulePrograms(List<ProgramSlot> programSlots) {
-        mSPAdapter.clear();
-        for (int i = 0; i < programSlots.size(); i++) {
-            mSPAdapter.add(programSlots.get(i));
-        }
-    }
+
 }

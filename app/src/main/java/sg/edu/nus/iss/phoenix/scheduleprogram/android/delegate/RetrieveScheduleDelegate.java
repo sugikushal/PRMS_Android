@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ReviewSelectScheduleProgramScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.controller.MaintainScheduleController;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.controller.ReviewSelectScheduledProgramController;
@@ -25,16 +26,13 @@ import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_B
 public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
     private static final String TAG = RetrieveScheduleDelegate.class.getName();
 
-    private MaintainScheduleController maintainScheduleController = null;
+    //private ReviewSelectScheduleProgramScreen reviewSelectScheduleProgramScreen = null;
     private ReviewSelectScheduledProgramController reviewSelectScheduledProgramController = null;
 
-    public RetrieveScheduleDelegate(MaintainScheduleController maintainScheduleController) {
-        this.reviewSelectScheduledProgramController = null;
-        this.maintainScheduleController = maintainScheduleController;
-    }
+
 
     public RetrieveScheduleDelegate(ReviewSelectScheduledProgramController reviewSelectScheduledProgramController) {
-        this.maintainScheduleController = null;
+
         this.reviewSelectScheduledProgramController = reviewSelectScheduledProgramController;
     }
 
@@ -96,8 +94,8 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
             Log.v(TAG, "JSON response error.");
         }
 
-        if (maintainScheduleController != null)
-            maintainScheduleController.scheduleRetrieved(programSlots);
+        if (reviewSelectScheduledProgramController != null)
+            reviewSelectScheduledProgramController.scheduleRetrieved(programSlots);
         /*else if (reviewSelectScheduledProgramController != null)
             reviewSelectScheduledProgramController.scheduleRetrieved(programSlots);*/
     }

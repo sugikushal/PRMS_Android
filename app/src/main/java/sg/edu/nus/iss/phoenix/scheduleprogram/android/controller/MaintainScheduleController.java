@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.DeleteScheduleDelegate;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.UpdateScheduleDelegate;
@@ -21,6 +22,7 @@ public class MaintainScheduleController {
     // Tag for logging.
     private static final String TAG = MaintainScheduleController.class.getName();
     private ProgramSlot psedit = null;
+
     private ScheduleListScreen scheduleListScreen;
     private ScheduleScreen scheduleScreen;
     private RadioProgram rpSelected = null;
@@ -46,6 +48,8 @@ public class MaintainScheduleController {
     }
 
 
+
+
     /**
      *selectCreateScheduleProgram-method.This method is to create Schedule delegate.
      * @param ps representation for the resource
@@ -64,14 +68,9 @@ public class MaintainScheduleController {
         startUseCase();
     }
 
-    /**
-     *onDisplayProgramSlotList-method.This method is to show the list of the Program Slot.
-     * @param scheduleListScreen
-     */
-    public void onDisplayProgramSlotList(ScheduleListScreen scheduleListScreen) {
-        this.scheduleListScreen = scheduleListScreen;
-        new RetrieveScheduleDelegate(this).execute("all");
-    }
+
+
+
 
     /**
      *selectUpdateScheduleProgram-method.This method is to create a new Update Schedule Delegate.
@@ -98,13 +97,8 @@ public class MaintainScheduleController {
         startUseCase();
     }
 
-    /**
-     *scheduleRetrieved-method.This method is to show schedule program
-     * @param programSlots representation for the resource.
-     */
-    public void scheduleRetrieved(List<ProgramSlot> programSlots) {
-        scheduleListScreen.showSchedulePrograms(programSlots);
-    }
+
+
 
     public void selectEditScheduleProgram(ProgramSlot programSlot) {
         psedit = programSlot;
@@ -121,6 +115,15 @@ public class MaintainScheduleController {
         else
             scheduleScreen.editScheduleProgram(psedit);
     }
+    public void onDisplayScheduleProgram(ScheduleScreen scheduleScreen,ProgramSlot ps) {
+        this.scheduleScreen = scheduleScreen;
+        if(ps == null)
+            scheduleScreen.createScheduleProgram();
+        else
+            scheduleScreen.editScheduleProgram(ps);
+    }
+
+
 
     public void selectedProgram(RadioProgram rpSelected) {
         this.rpSelected = rpSelected;
@@ -143,5 +146,13 @@ public class MaintainScheduleController {
 
     public void selectDeleteProgram(ProgramSlot ps) {
         new DeleteScheduleDelegate(this).execute(ps);
+    }
+    public void maintainedSchedule() {
+        ControlFactory.getMainController().maintainedSchedule();
+    }
+
+    public void reviewedSelectprogramslot()
+    {
+        ControlFactory.getMaintainScheduleController().startUseCase();
     }
 }
