@@ -41,7 +41,7 @@ public class ScheduleScreen extends AppCompatActivity {
     KeyListener mRPNameEditTextKeyListener = null;
     KeyListener mPresenterNameEditTextKeyListener=null;
     KeyListener mProducerNameEditTextKeyListener=null;
-
+    private  String copyAction=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +83,14 @@ public class ScheduleScreen extends AppCompatActivity {
                 ControlFactory.getReviewSelectProducerController().startUseCase();
             }
         });
+
+       this.copyAction= getIntent().getStringExtra("action");
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        ControlFactory.getMaintainScheduleController().onDisplayScheduleProgram(this);
+        ControlFactory.getMaintainScheduleController().onDisplayScheduleProgram(this,this.copyAction);
     }
 
     @Override
@@ -110,6 +112,12 @@ public class ScheduleScreen extends AppCompatActivity {
         if (psedit == null) {
             MenuItem menuItem = menu.findItem(R.id.action_delete);
             menuItem.setVisible(false);
+
+        }
+        else
+        {
+            MenuItem cpymItem=menu.findItem(R.id.action_copy);
+            cpymItem.setVisible(false);
         }
         return true;
     }
@@ -127,7 +135,7 @@ public class ScheduleScreen extends AppCompatActivity {
                             mPSDurationEditText.getText().toString(),mPSDateEditText.getText().toString() ,mPSStartTime.getText().toString(),mPresenterNameEditText.getText().toString(),mProducerNameEditText.getText().toString());
                     ControlFactory.getMaintainScheduleController().selectCreateScheduleProgram(ps);
                 }
-                else { // Edited.
+                else if(this.copyAction==null){ // Edited.
                     Log.v(TAG, "Saving program slot update " + psedit.getName() + "...");
                     psedit.setName(mRPNameEditText.getText().toString());
                     psedit.setDuration(mPSDurationEditText.getText().toString());
@@ -151,6 +159,10 @@ public class ScheduleScreen extends AppCompatActivity {
                 Log.v(TAG, "Canceling creating/editing program slot...");
                 ControlFactory.getMaintainScheduleController().selectCancelCreateEditSchedule();
                 return true;
+            case R.id.action_copy:
+                Log.v(TAG, "Copying creating/editing program slot...");
+                ControlFactory.getReviewSelectScheduledProgramController().startUseCase("copy");
+                return true;
         }
 
         return true;
@@ -170,6 +182,22 @@ public class ScheduleScreen extends AppCompatActivity {
         mPSStartTime.setText("",TextView.BufferType.EDITABLE);
         mPresenterNameEditText.setText("", TextView.BufferType.NORMAL);
         mProducerNameEditText.setText("", TextView.BufferType.NORMAL);
+
+        //todo presenter producer
+        mPSDateEditText.setKeyListener(mPSDateEditTextKeyListener);
+        mPSStartTime.setKeyListener(mPSStartTimeKeyListener);
+        mRPNameEditText.setKeyListener(mRPNameEditTextKeyListener);
+        mPresenterNameEditText.setKeyListener( mPresenterNameEditTextKeyListener);
+        mProducerNameEditText.setKeyListener( mProducerNameEditTextKeyListener);
+    }
+    public void copyScheduleProgram(ProgramSlot psCopy) {
+        this.psedit = null;
+        mRPNameEditText.setText(psCopy.getName(), TextView.BufferType.NORMAL);
+        mPSDurationEditText.setText(psCopy.getDuration(), TextView.BufferType.EDITABLE);
+        mPSDateEditText.setText(psCopy.getDate(), TextView.BufferType.EDITABLE);
+        mPSStartTime.setText(psCopy.getStartTime(),TextView.BufferType.EDITABLE);
+        mPresenterNameEditText.setText(psCopy.getPresenter(), TextView.BufferType.NORMAL);
+        mProducerNameEditText.setText(psCopy.getProducer(), TextView.BufferType.NORMAL);
 
         //todo presenter producer
         mPSDateEditText.setKeyListener(mPSDateEditTextKeyListener);

@@ -41,5 +41,7 @@
     <string name="title_activity_review_select_schedule_program_screen">
         ReviewSelectScheduleProgramScreen
     </string>
+    <string name="action_modify">Edit</string>
+    <string name="action_copy">Copy</string>
 
 </resources>

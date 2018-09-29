@@ -24,6 +24,7 @@ public class ReviewSelectScheduleProgramScreen extends AppCompatActivity {
     private ProgramSlot selectedPS = null;
     private Button OkButton=null;
     private Button cancelButton=null;
+    private String copyaction=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +54,12 @@ public class ReviewSelectScheduleProgramScreen extends AppCompatActivity {
 
         OkButton=(Button)findViewById(R.id.selectButton);
         cancelButton=(Button)findViewById(R.id.cancelButton);
-
+        copyaction=getIntent().getStringExtra("action");
 
         OkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlFactory.getReviewSelectScheduledProgramController().selectProgramSlot(selectedPS);
+                ControlFactory.getReviewSelectScheduledProgramController().selectProgramSlot(selectedPS,copyaction);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {

@@ -30,16 +30,16 @@
         android:layout_below="@+id/CreateProgramSlotButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
-        android:text="Browse Program Slot" />
+        android:text="Modify/Delete Program Slot" />
 
     <Button
         android:id="@+id/CreateProgramSlotButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignEnd="@+id/BrowsePSbutton"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="127dp"
-        android:text="Create Program Slot" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp"
+        android:text="Create/Copy Program Slot" />
 
 </RelativeLayout>

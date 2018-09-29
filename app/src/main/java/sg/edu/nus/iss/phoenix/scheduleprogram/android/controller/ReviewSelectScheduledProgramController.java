@@ -27,6 +27,13 @@ public class ReviewSelectScheduledProgramController {
        // intent.putExtra("action",action);
         MainController.displayScreen(intent);
     }
+    public void startUseCase(String action) {
+        psSelected = null;
+        //this.action=action;
+        Intent intent = new Intent(MainController.getApp(), ReviewSelectScheduleProgramScreen.class);
+        intent.putExtra("action",action);
+        MainController.displayScreen(intent);
+    }
 
     public void onDisplay(ReviewSelectScheduleProgramScreen reviewSelectScheduleProgramScreen) {
         this.reviewSelectScheduleProgramScreen = reviewSelectScheduleProgramScreen;
@@ -37,12 +44,18 @@ public class ReviewSelectScheduledProgramController {
         reviewSelectScheduleProgramScreen.showPrograms(programSlots);
     }*/
 
-    public void selectProgramSlot(ProgramSlot programSlot) {
+    public void selectProgramSlot(ProgramSlot programSlot,String action) {
         psSelected = programSlot;
         Log.v(TAG, "Selected radio program: " + programSlot.getName() + ".");
         // To call the base use case controller with the selected program Slot.
         // At present, call the MainController instead.
-        ControlFactory.getMaintainScheduleController().selectEditScheduleProgram(psSelected);
+        if (action!=null && action.equals("copy"))
+        {
+            ControlFactory.getMaintainScheduleController().selectCopyScheduleProgram(psSelected);
+        }
+        else {
+            ControlFactory.getMaintainScheduleController().selectEditScheduleProgram(psSelected);
+        }
     }
 
     public void selectCancel() {

@@ -112,17 +112,30 @@ public class MaintainScheduleController {
         MainController.displayScreen(intent);
     }
 
-    public void onDisplayScheduleProgram(ScheduleScreen scheduleScreen) {
+    public void selectCopyScheduleProgram(ProgramSlot programSlot) {
+        psedit = programSlot;
+        Log.v(TAG, "Copying Program Slot " + programSlot.getName() + "...");
+
+        Intent intent = new Intent(MainController.getApp(), ScheduleScreen.class);
+        intent.putExtra("action","copy");
+        MainController.displayScreen(intent);
+    }
+
+    public void onDisplayScheduleProgram(ScheduleScreen scheduleScreen,String action) {
         this.scheduleScreen = scheduleScreen;
         if(psedit == null)
             scheduleScreen.createScheduleProgram();
+        else if (action!=null && action.equals("copy"))
+            scheduleScreen.copyScheduleProgram(psedit);
         else
             scheduleScreen.editScheduleProgram(psedit);
     }
-    public void onDisplayScheduleProgram(ScheduleScreen scheduleScreen,ProgramSlot ps) {
+    public void onDisplayScheduleProgram(ScheduleScreen scheduleScreen,ProgramSlot ps,String action) {
         this.scheduleScreen = scheduleScreen;
         if(ps == null)
             scheduleScreen.createScheduleProgram();
+        else if (action!=null && action.equals("copy"))
+            scheduleScreen.copyScheduleProgram(ps);
         else
             scheduleScreen.editScheduleProgram(ps);
     }
