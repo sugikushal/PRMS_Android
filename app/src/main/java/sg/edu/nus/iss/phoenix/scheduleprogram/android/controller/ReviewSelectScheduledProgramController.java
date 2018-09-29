@@ -1,5 +1,9 @@
 package sg.edu.nus.iss.phoenix.scheduleprogram.android.controller;
 
+/**
+ * Created by SuganthiSugumar on 2018/9/21.
+ */
+
 import android.content.Intent;
 import android.util.Log;
 
@@ -7,9 +11,7 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
-import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ReviewSelectProgramScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ReviewSelectScheduleProgramScreen;
-import sg.edu.nus.iss.phoenix.scheduleprogram.android.ui.ScheduleListScreen;
 import sg.edu.nus.iss.phoenix.scheduleprogram.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.scheduleprogram.android.delegate.RetrieveScheduleDelegate;
 
