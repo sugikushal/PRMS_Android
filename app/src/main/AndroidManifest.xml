@@ -43,7 +43,6 @@
         <activity android:name=".scheduleprogram.android.ui.ReviewSelectProducerScreen" />
         <activity
             android:name=".scheduleprogram.android.ui.ReviewSelectScheduleProgramScreen"
-            android:label="@string/title_activity_review_select_schedule_program_screen"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
